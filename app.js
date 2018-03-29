@@ -55,7 +55,8 @@ app.post('/upload', (req, res) => {
                 // Use python shell
                 var PythonShell = require('python-shell');
                 var options = {
-                    args: [__dirname + "/" + req.file.path, req.file.filename]
+                    args: [__dirname + "/" + req.file.path, req.file.filename],
+					pythonPath:'C:/Python27/python'
                 };
 
                 console.log(__dirname + "/" + req.file.path);

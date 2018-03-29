@@ -11,17 +11,26 @@
 <body>
   <div class="container">
     <h1>Image Upload</h1>
-    <%= typeof msg != 'undefined' ? msg : '' %>
+   
     <form action="/upload" method="POST" enctype="multipart/form-data">
       <div class="file-field input-field">
         <div class="btn grey">
-          <span>File</span>
-          <input name="myImage" type="file">
+          <span>Input Folder Name</span>
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+           <input id="input" name="folder[input]" type="text">
+		    <label for="input"><%= typeof msg1 != 'undefined' ? msg1 : '' %></label>
         </div>
       </div>
+      <div class="file-field input-field">
+        <div class="btn grey">
+          <span>Output Folder Name</span>
+        </div>
+        <div class="file-path-wrapper">
+           <input name="folder[output]" type="text">
+        </div>
+      </div>
+
       <button type="submit" class="btn">Submit</button>
     </form>
     <br>
