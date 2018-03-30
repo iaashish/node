@@ -19,7 +19,7 @@
         </div>
         <div class="file-path-wrapper">
            <input id="input" name="folder[input]" type="text">
-		    <label for="input"><%= typeof msg1 != 'undefined' ? msg1 : '' %></label>
+		    
         </div>
       </div>
       <div class="file-field input-field">
@@ -34,6 +34,7 @@
       <button type="submit" class="btn">Submit</button>
     </form>
     <br>
+    <label for="input"><%= typeof msg != 'undefined' ? msg : '' %></label>
     <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img">
   </div>
 

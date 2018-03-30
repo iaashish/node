@@ -3,7 +3,7 @@ var multer = require('multer');
 var ejs = require('ejs');
 var path = require('path');
 var app = express();
-
+const fs = require('fs');
 
 
 //Storage Engine
@@ -43,9 +43,14 @@ app.post('/upload', (req, res) => {
                 msg: err
             });
         } else {
-            if (req.file == undefined) {
+            if (req.body.folder.input.length == 0) {
                 res.render('index', {
-                    msg: 'No file selected!'
+                    msg1: 'Please Enter Input Folder'
+                });
+
+            } else if (req.body.folder.output.length == 0) {
+                res.render('index', {
+                    msg2: 'Please Enter Output Folder'
                 });
             } else {
 
@@ -54,31 +59,53 @@ app.post('/upload', (req, res) => {
 
                 // Use python shell
                 var PythonShell = require('python-shell');
-                var options = {
-                    args: [__dirname + "/" + req.file.path, req.file.filename],
-					pythonPath:'C:/Python27/python'
-                };
+                fs.readdir('./public/input', function(err, items) {
+                    console.log(items);
+                    for (var i = 0; i < items.length; i++) {
+                        var options = {
+                            args: ['hello', items[i]],
+                            pythonPath: 'C:/Users/ippil/Anaconda2/python'
+                        };
+                        var pyshell = new PythonShell(myPythonScriptPath, options);
+                        pyshell.on('message', function(message) {
+                            // received a message sent from the Python script (a simple "print" statement)
+                            console.log("hello");
+                            res.render('index', {
+                                        msg: 'File uploaded!'
+                                    });
+                            console.log("world");
+                        });
 
-                console.log(__dirname + "/" + req.file.path);
-                PythonShell.run(myPythonScriptPath, options, function(err, results) {
-                    if (err) {
-                        throw err;
-                    };
-
-                    console.log('finished');
-                    res.render('index', {
-                        msg: 'File uploaded!',
-                        file: `uploads/${req.file.filename}`
-                    })
+                        // pyshell.end(function(err) {
+                        //     if (err) throw err;
+                        //     next();
+                        //     console.log('finished');
+                        // });
+                    }
                 });
+                //In python path include the python file without .exe extension
 
+                // console.log(__dirname + "/" + req.file.path);
+                // PythonShell.run(myPythonScriptPath, options, function(err, results) {
+                //     if (err) {
+                //         throw err;
+                //     };
 
+                //     console.log('finished');
+                //     res.render('index', {
+                //         msg: 'File uploaded!',
+                //         file: `uploads/${req.file.filename}`
+                //     })
+                // });
             }
         }
-    })
+    });
+});
+app.use(function(req, res, next) {
+    console.log(typeof req.next);
 
-})
-
+    next();
+});
 // Load ejs
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
