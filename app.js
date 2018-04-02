@@ -59,28 +59,31 @@ app.post('/upload', (req, res) => {
 
                 // Use python shell
                 var PythonShell = require('python-shell');
-                fs.readdir('./public/input', function(err, items) {
+                fs.readdir('./public/'+req.body.folder.input, function(err, items) {
                     console.log(items);
                     for (var i = 0; i < items.length; i++) {
                         var options = {
-                            args: ['hello', items[i]],
+                            args: [items[i], items[i],req.body.folder.input, req.body.folder.output,],
                             pythonPath: 'C:/Users/ippil/Anaconda2/python'
                         };
                         var pyshell = new PythonShell(myPythonScriptPath, options);
                         pyshell.on('message', function(message) {
                             // received a message sent from the Python script (a simple "print" statement)
                             console.log("hello");
-                            res.render('index', {
-                                        msg: 'File uploaded!'
-                                    });
-                            console.log("world");
-                        });
+                            console.log(message);
+                            // res.setHeader('Content-Type', 'application/json');
+							// res.send(JSON.stringify({ a: 1 }));
+                            });
 
-                        // pyshell.end(function(err) {
-                        //     if (err) throw err;
-                        //     next();
-                        //     console.log('finished');
-                        // });
+                        pyshell.end(function(err) {
+                            if (err) throw err;
+                            
+                            console.log('finished');
+                        });
+                        // res.render('index', {
+                        //             msg: 'File uploaded!'
+                                    
+                        //         });
                     }
                 });
                 //In python path include the python file without .exe extension

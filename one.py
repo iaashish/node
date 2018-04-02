@@ -1,24 +1,29 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 import cv2
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 import sys
 import os
+from PIL import Image
+
+
+
 
 save_path = os.path.dirname(os.path.realpath(sys.argv[0]))
-
-
-def image(a):
-    # img = cv2.imread( a )
-    # cv2.imwrite( "./public/output/"+sys.argv[1], img )
-    # edges = cv2.Canny(img, 100, 200)
-    # plt.subplot(121), plt.imshow(img, cmap='gray')
-    # plt.title('Original Image'), plt.xticks([]), plt.yticks([])
-    # plt.subplot(122), plt.imshow(edges, cmap='gray')
-    # plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
-    # plt.imsave(save_path + '\public\output/' + sys.argv[1], edges, cmap='gray', format='png')
-    print('1')
+   
+def imageProc(inputFileName): 
+    img = cv2.imread(save_path+'/public/'+sys.argv[3]+'/'+inputFileName, 0)
+    edges = cv2.Canny(img,100,200)
+    return 1, edges
     
-if __name__ == '__main__':
-    a = sys.argv[1]
-    image(a)
+
+if __name__ == "__main__":	
+    inputFileName = sys.argv[1]
+    flag, output = imageProc(inputFileName)
+
+    if flag:
+      cv2.imwrite(save_path+'/public/'+sys.argv[4]+'/'+sys.argv[1], output)
+
+    print save_path+'/public/output/'+sys.argv[1]
+    # print sys.argv[0]    
+    # print save_path
+    # print sys.argv[1]    
+    # print sys.argv[2]   
