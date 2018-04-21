@@ -1,0 +1,115 @@
+.file-field {
+    border: 1px solid #26a69a;
+    border-radius: 10px;
+}
+
+.grey {
+    border-radius: 7px 0px 0px 7px;
+    padding: 0 2rem;
+    background-color: #26a69a;
+    /* line-height:  3rem; */
+    height: 6rem;
+    line-height: 6rem;
+    float: left;
+    color: #fff;
+    width: 15rem;
+    font-size: 20px;
+}
+
+.grey1 {
+    border-radius: 7px;
+    padding: 0 2rem;
+    background-color: #26a69a;
+    /* line-height:  3rem; */
+    height: 6rem;
+    line-height: 6rem;
+    float: left;
+    color: #fff;
+    font-size: 20px;
+}
+
+.file-path-wrapper {
+    overflow: hidden;
+}
+
+.input-styles {
+    border-radius: 0px 9px 9px 0px;
+    width: 100%;
+    border: none;
+    /* border-bottom:  1px solid; */
+    height: 6rem;
+    outline: none;
+}
+
+.progress {
+        background: rgba(248, 255, 219, 1);
+        border: 0px solid rgba(240, 218, 218, 1);
+        border-radius: 6px;
+        height: 29px;
+    }
+
+    .progress-bar-custom {
+        background: rgba(235, 18, 18, 1);
+        background: -webkit-linear-gradient(top, rgba(161, 173, 24, 1) 0%, rgba(235, 18, 18, 1) 100%);
+        background: linear-gradient(to bottom, rgba(161, 173, 24, 1) 0%, rgba(235, 18, 18, 1) 100%);
+    }
+
+    .progress-striped .progress-bar-custom {
+        background-color: rgba(235, 18, 18, 1);
+        background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(252, 252, 252, 0.81), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(252, 252, 252, 0.81)), color-stop(0.75, rgba(252, 252, 252, 0.81)), color-stop(0.75, transparent), to(transparent)));
+        background-image: -webkit-linear-gradient(45deg, rgba(252, 252, 252, 0.81) 25%, transparent 25%, transparent 50%, rgba(252, 252, 252, 0.81) 50%, rgba(252, 252, 252, 0.81) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(252, 252, 252, 0.81) 25%, transparent 25%, transparent 50%, rgba(252, 252, 252, 0.81) 50%, rgba(252, 252, 252, 0.81) 75%, transparent 75%, transparent);
+        background-size: 23px 23px;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-brand {
+        color: rgba(255, 255, 255, 1);
+    }
+
+    #custom-bootstrap-menu.navbar-default {
+        font-size: 15px;
+        background-color: #800909;
+        /*  background: -webkit-linear-gradient(top, rgba(161, 58, 58, 1) 0%, rgba(238, 110, 115, 1) 100%);
+        background: linear-gradient(to bottom, rgba(161, 58, 58, 1) 0%, rgba(238, 110, 115, 1) 100%);*/
+        border-width: 1px;
+        border-radius: 0px;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(248, 248, 248, 0);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+        color: rgba(235, 223, 223, 1);
+        background-color: rgba(171, 38, 38, 0.5);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus,
+     #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:active {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(227, 57, 63, 1);
+        background: -webkit-linear-gradient(top, rgba(112, 37, 37, 1) 0%, rgba(227, 57, 63, 1) 100%);
+        background: linear-gradient(to bottom, rgba(112, 37, 37, 1) 0%, rgba(227, 57, 63, 1) 100%);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle {
+        border-color: #e3393f;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+        background-color: #e3393f;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+        background-color: #e3393f;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+        background-color: #ee6e73;
+    }

@@ -3,8 +3,14 @@ var multer = require('multer');
 var ejs = require('ejs');
 var path = require('path');
 var app = express();
-const fs = require('fs');
+var fs = require('fs');
+var http = require('http');
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({
+    extended: true
+})); // support encoded bodies
 
 //Storage Engine
 var storage = multer.diskStorage({
@@ -36,7 +42,7 @@ function checkFileType(file, cb) {
     }
 }
 
-app.post('/upload', (req, res) => {
+app.post('/', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             res.render('index', {
@@ -55,63 +61,96 @@ app.post('/upload', (req, res) => {
             } else {
 
                 // Use python shell
-                var myPythonScriptPath = 'one.py';
+                var myPythonScriptPath = 'image.py';
 
                 // Use python shell
                 var PythonShell = require('python-shell');
-                fs.readdir('./public/'+req.body.folder.input, function(err, items) {
-                    console.log(items);
+                fs.readdir('./public/' + req.body.folder.input, function(err, items) {
+                    var a = 0;
+                    var b = 0;
                     for (var i = 0; i < items.length; i++) {
                         var options = {
-                            args: [items[i], items[i],req.body.folder.input, req.body.folder.output,],
+                            args: [items[i], items[i], req.body.folder.input, req.body.folder.output, ],
                             pythonPath: 'C:/Users/ippil/Anaconda2/python'
                         };
                         var pyshell = new PythonShell(myPythonScriptPath, options);
-                        pyshell.on('message', function(message) {
-                            // received a message sent from the Python script (a simple "print" statement)
-                            console.log("hello");
-                            console.log(message);
-                            // res.setHeader('Content-Type', 'application/json');
-							// res.send(JSON.stringify({ a: 1 }));
-                            });
 
+                        pyshell.on('message', function(message, err) {
+                            if (err) {
+                                res.send("An unexpected error occured. Please try again later.");
+                            } else {
+                                // received a message sent from the Python script (a simple "print" statement)
+                                a = a + parseInt(message);
+                                b = b + parseInt(message);
+                                var width = (b / items.length) * 100 + '%';
+                                data = {
+                                    'current': b,
+                                    'total': items.length,
+                                    "width": width
+                                }
+                                fs.writeFile('views/test.json', JSON.stringify(data), 'utf8', (err) => {
+                                    if (err) throw err;
+                                });
+                            }
+                        });
                         pyshell.end(function(err) {
                             if (err) throw err;
-                            
-                            console.log('finished');
+
                         });
-                        // res.render('index', {
-                        //             msg: 'File uploaded!'
-                                    
-                        //         });
                     }
                 });
-                //In python path include the python file without .exe extension
-
-                // console.log(__dirname + "/" + req.file.path);
-                // PythonShell.run(myPythonScriptPath, options, function(err, results) {
-                //     if (err) {
-                //         throw err;
-                //     };
-
-                //     console.log('finished');
-                //     res.render('index', {
-                //         msg: 'File uploaded!',
-                //         file: `uploads/${req.file.filename}`
-                //     })
-                // });
             }
         }
     });
 });
-app.use(function(req, res, next) {
-    console.log(typeof req.next);
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/index.html'))
+});
+
+app.get('/gallery', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/gallery.html'))
+});
+
+app.get('/getdata', (req, res) => {
+    var data = {};
+    var input = [];
+    var output = [];
+    fs.readdir('./public/input', function(err, items) {
+        data['input'] = items;
+        fs.readdir('./public/output', function(err, items) {
+            data['output'] = items;
+            fs.writeFile('views/file.json', JSON.stringify(data), 'utf8', (err) => {
+                if (err) throw err;
+            });
+        });
+    });
+    let student;
+    fs.readFile('views/file.json', (err, data) => {
+        student = JSON.parse(data);
+        res.json(student);
+    });
+});
+
+app.get('/some', function(req, res) {
+    let student;
+    // console.log(req.body)
+    fs.readFile('views/test.json', (err, data) => {
+        console.log(data);
+        student = JSON.parse(data);
+        res.json(student);
+    });
+});
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
 // Load ejs
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
-app.get('/', (req, res) => res.render('index'));
-
-app.listen(3000, () => console.log('Listening to port 3000!'));
+app.listen(3000, function() {
+    console.log('App listening at http://localhost:3000');
+});
