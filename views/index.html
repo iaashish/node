@@ -1,78 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>Post form data using angularjs</title>
-      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-      <link href="css/styles.css" rel="stylesheet">
-   </head>
-   <body background="image/background.jpg">
-      <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-         <div class="container-fluid">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Post form data using angularjs</title>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body background="image/background.jpg">
+    <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        <div class="container-fluid">
             <div class="navbar-header"><a class="navbar-brand" href="#">UL Lafayette</a>
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-               </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
             </div>
             <div class="collapse navbar-collapse navbar-menubuilder">
-               <ul class="nav navbar-nav navbar-right">
-                  <li class="active"><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
-                  </li>
-                  <li><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
-                  </li>
-               </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
+                    </li>
+                    <li><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
+                    </li>
+                </ul>
             </div>
-         </div>
-      </div>
-      <div class="container" ng-app="postApp" ng-controller="postController">
-         <div class="container">
+        </div>
+    </div>
+    <div class="container" ng-app="postApp" ng-controller="postController">
+        <div class="container">
             <h1>Forest Animal Database</h1>
             <form ng-submit="submitForm()" name="userForm">
-               <div class="row">
-                  <div class="col-md-6 col-xs-12">
-                     <div class="file-field input-field">
-                        <div class="btn grey" style="color:  #fff;">
-                           <span><i class="fas fa-folder-open"></i> Input</span>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="file-field input-field">
+                            <div class="btn grey" style="color:  #fff;">
+                                <span><i class="fas fa-folder-open"></i> Input</span>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input id="input" name="folder[input]" ng-model="user.folder.input" type="text" class="input-styles" placeholder="Input Folder">
+                            </div>
                         </div>
-                        <div class="file-path-wrapper">
-                           <input id="input" name="folder[input]" ng-model="user.folder.input" type="text" class="input-styles" placeholder="Input Folder">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="file-field input-field">
+                            <div class="btn grey" style="color:  #fff;">
+                                <span><i class="far fa-save"></i> Output</span>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input name="folder[output]" ng-model="user.folder.output" type="text" class="input-styles" placeholder="Output Folder">
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="file-field input-field">
-                        <div class="btn grey" style="color:  #fff;">
-                           <span><i class="far fa-save"></i> Output</span>
-                        </div>
-                        <div class="file-path-wrapper">
-                           <input name="folder[output]" ng-model="user.folder.output" type="text" class="input-styles" placeholder="Output Folder">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <br>
-               <div class="row">
-                  <div class="col-md-2">
-                     <button href="#" class="btn btn-default grey1" style="background-color:#800909;
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button href="#" class="btn btn-default grey1" style="background-color:#800909;
                         color: #fff;
                         "><span class="glyphicon glyphicon-send"></span> Submit</button>
-                  </div>
-                  <div class="col-md-10">
-                     <div class="progress progress-striped active" style="margin-top: 2rem;">
-                        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" ng-style="myObj">
-                           <span class="sr-only">47% Complete</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <span ng-if="istrue">{{start}} of {{total}} images are processed</span>
                         </div>
-
-                     </div>
-                  </div>
-               </div>
+                        <div class="row">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" ng-style="myObj">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
-         </div>
-      </div>
-      <script src="js/index.js"></script>
-   </body>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
 </html>

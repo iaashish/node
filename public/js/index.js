@@ -1,6 +1,7 @@
 var postApp = angular.module('postApp', []);
 postApp.controller('postController', function($scope, $http, $interval) {
     $scope.user = {};
+    $scope.istrue = false;
     $scope.images = [];
     var dataObj = {
         name: $scope.user.name,
@@ -24,6 +25,9 @@ postApp.controller('postController', function($scope, $http, $interval) {
     function getData() {
         $http.get('/some').then(function(json) {
             console.log(json.data);
+            $scope.start = json.data.current;
+            $scope.total = json.data.total;
+            $scope.istrue = true;
             $scope.myObj = {
                 "width": json.data.width
             }
