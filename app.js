@@ -6,6 +6,7 @@ var app = express();
 var fs = require('fs');
 var http = require('http');
 var bodyParser = require('body-parser');
+var jsonfile = require('jsonfile');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
@@ -120,23 +121,22 @@ app.get('/getdata', (req, res) => {
         data['input'] = items;
         fs.readdir('./public/output', function(err, items) {
             data['output'] = items;
-            fs.writeFile('views/file.json', JSON.stringify(data), 'utf8', (err) => {
-                if (err) throw err;
-            });
+            // console.log(data);
+            jsonfile.writeFile('file.json', data, function(err) {
+                if(err) console.log(err);
+            })
         });
     });
     let student;
-    fs.readFile('views/file.json', (err, data) => {
-        student = JSON.parse(data);
-        res.json(student);
-    });
+    jsonfile.readFile('file.json', function(err, obj) {
+        res.json(obj);
+    })
 });
 
 app.get('/some', function(req, res) {
     let student;
     // console.log(req.body)
     fs.readFile('views/test.json', (err, data) => {
-        console.log(data);
         student = JSON.parse(data);
         res.json(student);
     });
@@ -153,4 +153,4 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.listen(3000, function() {
     console.log('App listening at http://localhost:3000');
-});
+}); // This is just a sample script. Paste your real code (javascript or HTML) here.

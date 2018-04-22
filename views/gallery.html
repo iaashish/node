@@ -31,11 +31,11 @@
         </div>
     </div>
     <div class="container" ng-app="postApp" ng-controller="postController" data-ng-init="init()">
-        <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
-        <div class="row text-center text-lg-left" >
+        <h1 class="my-4 text-center text-lg-left">Gallery</h1>
+        <div class="row text-center text-lg-left">
             <div class="col-md-4" ng-repeat="i in images">
                 <div class="thumbnail" style="width:350px;height:240px">
-                    <a href="#" target="_blank">
+                    <a href="#{{$index}}" data-toggle="modal">
                         <div class="row">
                             <div class="col-md-6">
                                 <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
@@ -44,16 +44,41 @@
                                 <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
                             </div>
                         </div>
-                         <div class="caption">
-          <p>Lorem ipsum...</p>
-        </div>
+                        <div class="caption" style="float:  left;">
+                            <span class="badge badge-info">Name : {{i.input}}</span>
+                        </div>
                     </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{i.input}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
     </div>
-
     <script src="js/index.js"></script>
 </body>
 

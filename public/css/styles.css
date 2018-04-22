@@ -39,6 +39,9 @@
     /* border-bottom:  1px solid; */
     height: 6rem;
     outline: none;
+        padding: 23px;
+    font-size: 25px;
+    font-style: italic;
 }
 
 .progress {
