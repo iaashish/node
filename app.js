@@ -72,7 +72,7 @@ app.post('/', (req, res) => {
                     for (var i = 0; i < items.length; i++) {
                         var options = {
                             args: [items[i], items[i], req.body.folder.input, req.body.folder.output, ],
-                            pythonPath: 'C:/Users/ippil/Anaconda2/python'
+                            pythonPath: 'C:/Users/ippil/Anaconda2/python'//Update with your python location
                         };
                         var pyshell = new PythonShell(myPythonScriptPath, options);
 
@@ -153,4 +153,4 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.listen(3000, function() {
     console.log('App listening at http://localhost:3000');
-}); // This is just a sample script. Paste your real code (javascript or HTML) here.
+});
