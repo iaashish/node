@@ -7,7 +7,7 @@ var fs = require('fs');
 var http = require('http');
 var bodyParser = require('body-parser');
 var jsonfile = require('jsonfile');
-
+var formidable = require('formidable');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
     extended: true
@@ -44,34 +44,45 @@ function checkFileType(file, cb) {
 }
 
 app.post('/', (req, res) => {
+	// // create an incoming form object
+ //  var form = new formidable.IncomingForm();
+
+ //  // specify that we want to allow the user to upload multiple files in a single request
+ //  form.multiples = true;
+
+ //  // store all uploads in the /uploads directory
+ //  form.uploadDir = path.join(__dirname, '/public/input');
+
+ //  // every time a file has been uploaded successfully,
+ //  // rename it to it's orignal name
+ //  form.on('file', function(field, file) {
+ //    fs.rename(file.path, path.join(form.uploadDir, file.name));
+ //  });
+
+ //  // log any errors that occur
+ //  form.on('error', function(err) {
+ //    console.log('An error has occured: \n' + err);
+ //  });
+ //    form.parse(req);
     upload(req, res, (err) => {
         if (err) {
             res.render('index', {
                 msg: err
             });
         } else {
-            if (req.body.folder.input.length == 0) {
-                res.render('index', {
-                    msg1: 'Please Enter Input Folder'
-                });
-
-            } else if (req.body.folder.output.length == 0) {
-                res.render('index', {
-                    msg2: 'Please Enter Output Folder'
-                });
-            } else {
+            
 
                 // Use python shell
                 var myPythonScriptPath = 'image.py';
 
                 // Use python shell
                 var PythonShell = require('python-shell');
-                fs.readdir('./public/' + req.body.folder.input, function(err, items) {
+                fs.readdir('./public/input', function(err, items) {
                     var a = 0;
                     var b = 0;
                     for (var i = 0; i < items.length; i++) {
                         var options = {
-                            args: [items[i], items[i], req.body.folder.input, req.body.folder.output, ],
+                            args: [items[i], items[i], 'input', 'output', ],
                             pythonPath: 'C:/Users/ippil/Anaconda2/python'//Update with your python location
                         };
                         var pyshell = new PythonShell(myPythonScriptPath, options);
@@ -100,11 +111,41 @@ app.post('/', (req, res) => {
                         });
                     }
                 });
-            }
+            
         }
     });
 });
+app.post('/upload1', function(req, res){
+console.log(req.res);
+  // create an incoming form object
+  var form = new formidable.IncomingForm();
 
+  // specify that we want to allow the user to upload multiple files in a single request
+  form.multiples = true;
+
+  // store all uploads in the /uploads directory
+  form.uploadDir = path.join(__dirname, '/public/input');
+
+  // every time a file has been uploaded successfully,
+  // rename it to it's orignal name
+  form.on('file', function(field, file) {
+    fs.rename(file.path, path.join(form.uploadDir, file.name));
+  });
+
+  // log any errors that occur
+  form.on('error', function(err) {
+    console.log('An error has occured: \n' + err);
+  });
+
+  // once all the files have been uploaded, send a response to the client
+  form.on('end', function() {
+    res.end('success');
+  });
+
+  // parse the incoming request containing the form data
+  form.parse(req);
+
+});
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/index.html'))
 });
@@ -112,6 +153,11 @@ app.get('/', (req, res) => {
 app.get('/gallery', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/gallery.html'))
 });
+
+app.get('/gallery1', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/Demo.html'))
+});
+
 
 app.get('/getdata', (req, res) => {
     var data = {};
