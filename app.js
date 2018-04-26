@@ -116,7 +116,6 @@ app.post('/', (req, res) => {
     });
 });
 app.post('/upload1', function(req, res){
-console.log(req.res);
   // create an incoming form object
   var form = new formidable.IncomingForm();
 
