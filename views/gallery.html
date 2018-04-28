@@ -13,64 +13,68 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body background="image/background.jpg">
-    <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand" href="#">UL Lafayette</a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
+<body>
+    <div id="hero">
+        <div id="hero-overlay">
+            <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation" style="
+    border-color: #800909;">
+                <div class="container-fluid">
+                    <div class="navbar-header"><a class="navbar-brand" href="#">UL Lafayette</a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-menubuilder">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
+                            </li>
+                            <li class="active"><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="collapse navbar-collapse navbar-menubuilder">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
-                    </li>
-                    <li class="active"><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container" ng-app="postApp" ng-controller="postController" data-ng-init="init()">
-        <h1 class="my-4 text-center text-lg-left">Gallery</h1>
-        <div class="row text-center text-lg-left">
-            <div class="col-md-4" ng-repeat="i in images">
-                <div class="thumbnail" style="width:350px;height:240px">
-                    <a href="#{{$index}}" data-toggle="modal">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
-                            </div>
-                            <div class="col-md-6">
-                                <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
-                            </div>
-                        </div>
-                        <div class="caption" style="float:  left;">
-                            <span class="badge badge-info">Name : {{i.input}}</span>
-                        </div>
-                    </a>
-                    <!-- Modal -->
-                    <div class="modal fade" id="{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{i.input}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
-                                        </div>
+            <div class="container" ng-app="postApp" ng-controller="postController" data-ng-init="init()">
+                <h1 class="my-4 text-center text-lg-left">Gallery</h1>
+                <div class="row text-center text-lg-left">
+                    <div class="col-md-4" ng-repeat="i in images">
+                        <div class="thumbnail" style="width:350px;height:240px">
+                            <a href="#{{$index}}" data-toggle="modal">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    
+                                <div class="caption" style="float:  left;">
+                                    <span class="badge badge-info">Name : {{i.input}}</span>
+                                </div>
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{i.input}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="/input/{{i.input}}" alt="Lights" style="width:100%;height: 150px">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img src="/output/{{i.output}}" alt="Lights" style="width:100%;height: 150px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

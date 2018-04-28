@@ -1,13 +1,34 @@
 body{
-  
-  background: 
-    /* top, transparent red */ 
-    linear-gradient(
-      rgba(35, 33, 33, 0.45), 
-      rgba(0, 0, 0, 0.45)
-    ),
-    /* bottom, image */
-    url('../image/back.jpg');
+
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 14pt;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+}
+
+#hero{
+    background-image: url('../image/back.jpg');
+    background-size: cover;
+    background-position: center center;
+    /*position : relative;*/
+    top :0;
+    bottom: 0;
+    height: 100vh;
+    z-index: -10;
+}
+
+#hero-overlay{
+    /*position: absolute;*/
+    background-color: rgba(0,0,0,0.5);
+    top:0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -5;
+
 }
 
 .file-field {
@@ -22,7 +43,6 @@ body{
     /* line-height:  3rem; */
     height: 6rem;
     line-height: 6rem;
-    float: left;
     color: #fff;
     width: 15rem;
     font-size: 20px;
@@ -35,7 +55,7 @@ body{
     /* line-height:  3rem; */
     height: 6rem;
     line-height: 6rem;
-    float: left;
+   
     color: #fff;
     font-size: 20px;
 }
@@ -97,14 +117,14 @@ body{
 
     #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
     #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
-        color: rgba(235, 223, 223, 1);
-        background-color: rgba(171, 38, 38, 0.5);
+        color: white;
+       
     }
 
     #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
-    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
-    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus,
-     #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:active {
+    #custom-bootstrap-menu.navbar-default .navbar-nav>a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>a:focus,
+     #custom-bootstrap-menu.navbar-default .navbar-nav>a:active {
         color: rgba(255, 255, 255, 1);
         background-color: rgba(227, 57, 63, 1);
         background: -webkit-linear-gradient(top, rgba(112, 37, 37, 1) 0%, rgba(227, 57, 63, 1) 100%);
