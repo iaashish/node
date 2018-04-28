@@ -43,160 +43,52 @@ function checkFileType(file, cb) {
     }
 }
 
-app.post('/', (req, res) => {
-    // // create an incoming form object
-    //  var form = new formidable.IncomingForm();
-
-    //  // specify that we want to allow the user to upload multiple files in a single request
-    //  form.multiples = true;
-
-    //  // store all uploads in the /uploads directory
-    //  form.uploadDir = path.join(__dirname, '/public/input');
-
-    //  // every time a file has been uploaded successfully,
-    //  // rename it to it's orignal name
-    //  form.on('file', function(field, file) {
-    //    fs.rename(file.path, path.join(form.uploadDir, file.name));
-    //  });
-
-    //  // log any errors that occur
-    //  form.on('error', function(err) {
-    //    console.log('An error has occured: \n' + err);
-    //  });
-    //    form.parse(req);
-    upload(req, res, (err) => {
-        if (err) {
-            res.render('index', {
-                msg: err
-            });
-        } else {
-
-
-            // Use python shell
-            var myPythonScriptPath = 'image.py';
-
-            // Use python shell
-            var PythonShell = require('python-shell');
-            fs.readdir('./public/input', function(err, items) {
-                var a = 0;
-                var b = 0;
-                for (var i = 0; i < items.length; i++) {
-                    var options = {
-                        args: [items[i], items[i], 'input', 'output', ],
-                        pythonPath: 'C:/Users/ippil/Anaconda2/python' //Update with your python location
-                    };
-                    var pyshell = new PythonShell(myPythonScriptPath, options);
-
-                    pyshell.on('message', function(message, err) {
-                        if (err) {
-                            res.send("An unexpected error occured. Please try again later.");
-                        } else {
-                            // received a message sent from the Python script (a simple "print" statement)
-                            a = a + parseInt(message);
-                            b = b + parseInt(message);
-                            var width = (b / items.length) * 100 + '%';
-                            data = {
-                                'current': b,
-                                'total': items.length,
-                                "width": width
-                            }
-                            fs.writeFile('views/test.json', JSON.stringify(data), 'utf8', (err) => {
-                                if (err) throw err;
-                            });
-                        }
-                    });
-                    pyshell.end(function(err) {
-                        if (err) throw err;
-
-                    });
-                }
-            });
-        }
-    });
-});
 app.post('/upload1', upload, function(req, res) {
     // create an incoming form object
     // var form = new formidable.IncomingForm();
     let files = [];
     for (var a = 0; a < req.files.length; a++) {
-        files.push( req.files[a].originalname);
+        files.push(req.files[a].originalname);
     }
-    console.log(files);
-    // specify that we want to allow the user to upload multiple files in a single request
-    // form.multiples = true;
-
-    // store all uploads in the /uploads directory
-    // form.uploadDir = path.join(__dirname, '/public/input');
-
-    // every time a file has been uploaded successfully,
-    // rename it to it's orignal name
-    // var body = ''; 
-    //   req.on('data', function (data) 
-    // {
-    //     body += data; 
-    // });
-    // console.log(body);
-    // console.log(req.get('Content-Type'));
-
-    // form.on('file', function(field, file) {
-    // console.log(file.name);
-    // fs.rename(file.path, path.join(form.uploadDir, file.name));
-    // });
-
-    // log any errors that occur
-    // form.on('error', function(err) {
-    // console.log('An error has occured: \n' + err);
-    // });
-
-    // once all the files have been uploaded, send a response to the client
-    // form.on('end', function() {
-    // res.end('success');
-    // });
-
-    // parse the incoming request containing the form data
-    // form.parse(req);
-
     // Use python shell
     var myPythonScriptPath = 'image.py';
 
     // Use python shell
     var PythonShell = require('python-shell');
-        var a = 0;
-        var b = 0;
-        for (var i = 0; i < files.length; i++) {
-            var options = {
-                args: [files[i], files[i], 'input', 'output'],
-                pythonPath: 'C:/Users/ippil/Anaconda2/python' //Update with your python location
-            };
-            var pyshell = new PythonShell(myPythonScriptPath, options);
+    var a = 0;
+    var b = 0;
+    for (var i = 0; i < files.length; i++) {
+        var options = {
+            args: [files[i], files[i], 'input', 'output'],
+            pythonPath: 'C:/Users/ippil/Anaconda2/python' //Update with your python location
+        };
+        var pyshell = new PythonShell(myPythonScriptPath, options);
 
-            pyshell.on('message', function(message, err) {
-                if (err) {
-                    res.send("An unexpected error occured. Please try again later.");
-                } else {
-
-                    // received a message sent from the Python script (a simple "print" statement)
-                    a = a + parseInt(message);
-                    b = b + parseInt(message);
-                    if(a == 1){
-                        res.end('success');
-                    }
-                    var width = (b / files.length) * 100 + '%';
-                    data = {
-                        'current': b,
-                        'total': files.length,
-                        "width": width
-                    }
-                    fs.writeFile('views/test.json', JSON.stringify(data), 'utf8', (err) => {
-                        if (err) throw err;
-                    });
+        pyshell.on('message', function(message, err) {
+            if (err) {
+                res.send("An unexpected error occured. Please try again later.");
+            } else {
+                // received a message sent from the Python script (a simple "print" statement)
+                a = a + parseInt(message);
+                b = b + parseInt(message);
+                if (a == 1) {
+                    res.end('success');
                 }
-            });
-            pyshell.end(function(err) {
-                if (err) throw err;
-            });
-        }
-   
+                var width = (b / files.length) * 100 + '%';
+                data = {
+                    'current': b,
+                    'total': files.length,
+                    "width": width
+                }
+                fs.writeFile('views/test.json', JSON.stringify(data), 'utf8', (err) => {
+                    if (err) throw err;
+                });
+            }
+        });
+        pyshell.end(function(err) {
+            if (err) throw err;
+        });
+    }
 });
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/index.html'))

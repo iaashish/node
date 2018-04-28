@@ -76,6 +76,13 @@ body{
     font-style: italic;
 }
 
+.progress1 {
+    border: 1px solid red;
+    width: 1%;
+    height: 150%;
+    line-height: 150%;
+}
+
 .progress {
         background: rgba(248, 255, 219, 1);
         border: 0px solid rgba(240, 218, 218, 1);

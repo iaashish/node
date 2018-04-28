@@ -25,22 +25,23 @@ postApp.controller('postController', function($scope, $http, $interval) {
 
     //1. Used to list all selected files
     $scope.files = [];
-
-    //2. a simple model that want to pass to Web API along with selected files
-    $scope.jsonData = {
-        name: "Jignesh Trivedi",
-        comments: "Multiple upload files"
-    };
+        
     //3. listen for the file selected event which is raised from directive
     $scope.$on("seletedFile", function (event, args) {
         $scope.$apply(function () {
             //add the file object to the scope's files collection
             $scope.files.push(args.file);
+            $scope.myObj = {
+                "width": '1%'
+            }
         });
     });
 
     //4. Post data and selected files.
     $scope.save = function () {
+        $scope.myObj = {
+                "width": '1%'
+            }
         $http({
             method: 'POST',
             url: "http://localhost:3000/upload1",
@@ -53,7 +54,7 @@ postApp.controller('postController', function($scope, $http, $interval) {
                 }
                 return formData;
             },
-            data: { jsonData: $scope.jsonData, files: $scope.files }
+            data: {files: $scope.files }
         }).
         success(function (data, status, headers, config) {
             // alert('success');
@@ -94,10 +95,4 @@ postApp.controller('postController', function($scope, $http, $interval) {
             }
         });
     }
-    $scope.submitForm = function() {
-        promise = $interval(getData, 1000);
-        $http.post("/").success(function(message, status) {
-            console.log(message);
-        })
-    };
 });
