@@ -19,11 +19,8 @@ postApp.controller('postController', function($scope, $http, $interval) {
     $scope.user = {};
     $scope.istrue = false;
     $scope.images = [];
-    var dataObj = {
-        name: $scope.user.name,
-        employees: $scope.employees,
-        headoffice: $scope.headoffice
-    };
+    $scope.disabled= true;
+
     var promise;
 
     //1. Used to list all selected files
@@ -51,7 +48,6 @@ postApp.controller('postController', function($scope, $http, $interval) {
            
             transformRequest: function (data) {
                 var formData = new FormData();
-                formData.append("jsonData", angular.toJson(data.jsonData));
                 for (var i = 0; i < data.files.length; i++) {
                     formData.append("file" + i, data.files[i]);
                 }
@@ -60,11 +56,16 @@ postApp.controller('postController', function($scope, $http, $interval) {
             data: { jsonData: $scope.jsonData, files: $scope.files }
         }).
         success(function (data, status, headers, config) {
-            alert("success!");
+            // alert('success');
+            $scope.disabled = false;
+            promise = $interval(getData, 1000);
+
         }).
         error(function (data, status, headers, config) {
-            alert("failed!");
+           
         });
+
+        $scope.files = [];
     };
 
     $scope.init = function() {

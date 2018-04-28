@@ -1,71 +1,69 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Post form data using angularjs</title>
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <link href="css/styles.css" rel="stylesheet">
-</head>
-
-<body background="image/background.jpg">
-    <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-        <div class="container-fluid">
+   <head>
+      <meta charset="UTF-8">
+      <title>Post form data using angularjs</title>
+      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+      <link href="css/styles.css" rel="stylesheet">
+   </head>
+   <body>
+      <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation" style="
+    border-color: #800909;">
+         <div class="container-fluid">
             <div class="navbar-header"><a class="navbar-brand" href="#">UL Lafayette</a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button>
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+               </button>
             </div>
             <div class="collapse navbar-collapse navbar-menubuilder">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
-                    </li>
-                    <li><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
-                    </li>
-                </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="/"> <i class="fas fa-upload"></i> Image Upload</a>
+                  </li>
+                  <li><a href="/gallery"><i class="far fa-image"></i> Gallery</a>
+                  </li>
+               </ul>
             </div>
-        </div>
-    </div>
-    <div class="container" ng-app="postApp" ng-controller="postController">
-        <div class="container">
+         </div>
+      </div>
+      <div class="container" ng-app="postApp" ng-controller="postController">
+         <div class="container">
             <h1>Forest Animal Database</h1>
             <form  name="userForm">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="file-field input-field"">
-                            <label class="input-group-btn">
-                                    <span class="btn grey" style="border-radius: 10px 0px 0px 10px;
-    color: #fff;">
-                            Browse&hellip; <input type="file" style="display: none;" upload-files multiple>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="file-field input-field"">
+                        <label class="input-group-btn">
+                        <span class="btn grey" style="border-radius: 10px 0px 0px 10px;
+                           color: #fff;">
+                        Browse&hellip; <input type="file" style="display: none;" upload-files multiple>
                         </span>
-                                </label>
-                            </div>
-                    </div>
-                </div>
-                <div class="row" style="margin:30px">
-                    <div class="col-md-2">
-                        <button class="btn btn-default grey1" ng-click="save()" style="background-color:#800909;
-                            color: #fff;
-                            "><span class="glyphicon glyphicon-send"></span> Upload</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default grey1" ng-click="submitForm()" style="background-color:#800909;
-                            color: #fff;
-                            "><span class="glyphicon glyphicon-send"></span> Submit</button>
-                    </div>
-                </div>
+                        </label>
+                     </div>
+                  </div>
+               </div>
+               <div class="row" style="margin:30px">
+                  <div class="col-md-2">
+                     <button class="btn btn-default grey1" ng-click="save()" style="background-color:#800909;
+                        color: #fff;
+                        "><span class="glyphicon glyphicon-send"></span> Upload</button>
+                  </div>
+                  <!-- <div class="col-md-2">
+                     <button class="btn btn-default grey1" ng-disabled="disabled" ng-click="submitForm()" style="background-color:#800909;
+                         color: #fff;
+                         "><span class="glyphicon glyphicon-send" ></span> Submit</button>
+                     </div> -->
+               </div>
             </form>
-        </div>
-    </div>
-    <script src="js/index.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/demoController.js"></script>
-    <script src="js/fileUploadDirective.js"></script>
-    <!-- <script src="js/upload.js"></script> -->
-</body>
-
+         </div>
+      </div>
+      <script src="js/index.js"></script>
+      <script src="js/app.js"></script>
+      <script src="js/demoController.js"></script>
+      <script src="js/fileUploadDirective.js"></script>
+      <!-- <script src="js/upload.js"></script> -->
+   </body>
 </html>
